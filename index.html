@@ -80,128 +80,331 @@
 
     .insights-content {
       background: #ffffff;
-      border-radius: 16px;
-      padding: 2rem;
-      max-width: 900px;
+      border-radius: 20px;
+      padding: 0;
+      max-width: 950px;
       max-height: 90%;
-      overflow-y: auto;
+      overflow: hidden;
       margin: 1rem;
       position: relative;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(102, 126, 234, 0.1);
+    }
+
+    .insights-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 2rem 2.5rem 1.5rem 2.5rem;
+      position: relative;
+      border-radius: 20px 20px 0 0;
+    }
+
+    .insights-header h2 {
+      margin: 0;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: white;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .insights-header .subtitle {
+      margin: 0.5rem 0 0 0;
+      opacity: 0.9;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    .insights-body {
+      padding: 2rem 2.5rem;
+      overflow-y: auto;
+      max-height: calc(90vh - 120px);
     }
 
     .insights-close {
       position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: #f7fafc;
-      border: none;
+      top: 1.5rem;
+      right: 2rem;
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.3);
       border-radius: 50%;
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       cursor: pointer;
-      font-size: 1.2rem;
-      color: #4a5568;
+      font-size: 1.3rem;
+      color: white;
       transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(10px);
     }
 
     .insights-close:hover {
-      background: #e2e8f0;
-      transform: rotate(90deg);
+      background: rgba(255, 255, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.5);
+      transform: rotate(90deg) scale(1.1);
+    }
+
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, #e2e8f0 20%, #e2e8f0 80%, transparent 100%);
+      margin: 2.5rem 0;
+      position: relative;
+    }
+
+    .section-divider::after {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 4px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 2px;
     }
 
     .methodology-section {
-      background: #f7fafc;
-      padding: 1.5rem;
-      border-radius: 12px;
-      margin: 1.5rem 0;
-      border-left: 4px solid #667eea;
+      background: linear-gradient(135deg, #f8faff 0%, #f1f5ff 100%);
+      padding: 2rem;
+      border-radius: 16px;
+      margin: 2rem 0;
+      border: 1px solid rgba(102, 126, 234, 0.1);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .methodology-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .methodology-section:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
     }
 
     .methodology-section h4 {
       color: #667eea;
-      margin: 0 0 1rem 0;
-      font-size: 1.2rem;
-      font-weight: 600;
+      margin: 0 0 1.25rem 0;
+      font-size: 1.3rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .methodology-section h4::before {
+      content: attr(data-icon);
+      font-size: 1.5rem;
+      filter: drop-shadow(0 2px 4px rgba(102, 126, 234, 0.3));
     }
 
     .methodology-section p {
       color: #4a5568;
-      line-height: 1.6;
+      line-height: 1.7;
       margin: 0;
-      font-size: 1rem;
+      font-size: 1.05rem;
+    }
+
+    .methodology-section .highlight {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 600;
     }
 
     .impact-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      margin: 1.5rem 0;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
     }
 
     .impact-card {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
-      padding: 1.5rem;
-      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      border-radius: 16px;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .impact-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+      transition: all 0.3s ease;
+    }
+
+    .impact-card:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+    }
+
+    .impact-card:hover::before {
+      top: -30%;
+      right: -30%;
     }
 
     .impact-card .metric {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 1;
     }
 
     .impact-card .label {
-      font-size: 0.9rem;
-      opacity: 0.9;
+      font-size: 1rem;
+      opacity: 0.95;
+      font-weight: 500;
+      position: relative;
+      z-index: 1;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .theory-list {
       list-style: none;
       padding: 0;
-      margin: 1rem 0;
+      margin: 2rem 0;
+      background: #fafbff;
+      border-radius: 16px;
+      padding: 1.5rem;
+      border: 1px solid rgba(102, 126, 234, 0.1);
     }
 
     .theory-list li {
-      padding: 0.75rem 0;
-      padding-left: 2rem;
+      padding: 1.25rem 0;
+      padding-left: 3rem;
       position: relative;
       color: #4a5568;
-      line-height: 1.6;
-      border-bottom: 1px solid #e2e8f0;
+      line-height: 1.7;
+      border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+      transition: all 0.3s ease;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
     }
 
     .theory-list li:last-child {
       border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .theory-list li:hover {
+      background: rgba(102, 126, 234, 0.05);
+      padding-left: 3.5rem;
     }
 
     .theory-list li:before {
       content: "🎯";
       position: absolute;
-      left: 0;
-      font-size: 1.2rem;
+      left: 0.75rem;
+      top: 1.25rem;
+      font-size: 1.4rem;
+      filter: drop-shadow(0 2px 4px rgba(102, 126, 234, 0.3));
+    }
+
+    .theory-list li strong {
+      color: #667eea;
+      font-weight: 700;
     }
 
     .implementation-note {
-      background: #e6fffa;
-      border: 1px solid #81e6d9;
-      padding: 1.5rem;
-      border-radius: 12px;
-      margin: 1.5rem 0;
+      background: linear-gradient(135deg, #e6fffa 0%, #f0fdfa 100%);
+      border: 2px solid #81e6d9;
+      padding: 2rem;
+      border-radius: 16px;
+      margin: 2.5rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .implementation-note::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #38b2ac 0%, #4fd1c7 100%);
     }
 
     .implementation-note h4 {
       color: #234e52;
-      margin: 0 0 1rem 0;
-      font-size: 1.1rem;
+      margin: 0 0 1.25rem 0;
+      font-size: 1.3rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .implementation-note h4::before {
+      content: '🛠️';
+      font-size: 1.5rem;
+      filter: drop-shadow(0 2px 4px rgba(56, 178, 172, 0.3));
     }
 
     .implementation-note p {
       color: #285e61;
       margin: 0;
-      line-height: 1.6;
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    .implementation-note .tech-stack {
+      background: rgba(56, 178, 172, 0.1);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      display: inline-block;
+      margin: 0.5rem 0;
+      font-weight: 600;
+      color: #234e52;
+    }
+
+    .section-header {
+      text-align: center;
+      margin: 3rem 0 2rem 0;
+      position: relative;
+    }
+
+    .section-header h3 {
+      color: #667eea;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0;
+      padding: 0 2rem;
+      background: white;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-header::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 0%, #667eea 20%, #764ba2 80%, transparent 100%);
+      z-index: 0;
     }
 
     .progress-bar {
@@ -708,26 +911,98 @@
       }
 
       .insights-content {
-        padding: 1.5rem;
         margin: 0.5rem;
         max-height: 95%;
+        border-radius: 16px;
+      }
+
+      .insights-header {
+        padding: 1.5rem 1.5rem 1rem 1.5rem;
+        border-radius: 16px 16px 0 0;
+      }
+
+      .insights-header h2 {
+        font-size: 1.4rem;
+      }
+
+      .insights-header .subtitle {
+        font-size: 0.9rem;
+      }
+
+      .insights-body {
+        padding: 1.5rem;
+      }
+
+      .insights-close {
+        top: 1rem;
+        right: 1.5rem;
+        width: 36px;
+        height: 36px;
+        font-size: 1.1rem;
       }
 
       .impact-grid {
         grid-template-columns: 1fr 1fr;
-        gap: 0.75rem;
+        gap: 1rem;
       }
 
       .impact-card {
-        padding: 1rem;
+        padding: 1.5rem 1rem;
       }
 
       .impact-card .metric {
-        font-size: 1.5rem;
+        font-size: 2rem;
       }
 
       .methodology-section {
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+      }
+
+      .methodology-section h4 {
+        font-size: 1.1rem;
+      }
+
+      .methodology-section h4::before {
+        font-size: 1.3rem;
+      }
+
+      .section-header h3 {
+        font-size: 1.3rem;
+        padding: 0 1rem;
+      }
+
+      .theory-list {
         padding: 1.25rem;
+      }
+
+      .theory-list li {
+        padding: 1rem 0;
+        padding-left: 2.5rem;
+        font-size: 0.95rem;
+      }
+
+      .theory-list li:before {
+        left: 0.5rem;
+        top: 1rem;
+        font-size: 1.2rem;
+      }
+
+      .implementation-note {
+        padding: 1.5rem;
+      }
+
+      .implementation-note h4 {
+        font-size: 1.1rem;
+      }
+
+      .implementation-note h4::before {
+        font-size: 1.3rem;
+      }
+
+      .tech-stack {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
       }
 
       .screen {
@@ -957,78 +1232,90 @@
  <body>
   <div class="course-container"><!-- Insights Toggle Button --> <button class="insights-toggle" onclick="toggleInsights()"> 📊 Course Insights </button> <!-- Insights Panel -->
    <div class="insights-panel" id="insightsPanel">
-    <div class="insights-content"><button class="insights-close" onclick="toggleInsights()">×</button>
-     <h2 style="color: #667eea; margin: 0 0 1.5rem 0;">Course Design &amp; Learning Theory Analysis</h2>
-     <div class="methodology-section">
-      <h4>🎯 Learning Objectives &amp; Bloom's Taxonomy</h4>
-      <p><strong>Cognitive Levels Applied:</strong> Knowledge (Define EI components) → Application (Apply to scenarios) → Evaluation (Assess leadership responses). This progression ensures deep learning and practical skill transfer.</p>
+    <div class="insights-content">
+     <div class="insights-header"><button class="insights-close" onclick="toggleInsights()">×</button>
+      <h2 style="color: #ffffff; text-shadow: 0 3px 6px rgba(0,0,0,0.4); font-weight: 800;">Course Design &amp; Learning Theory Analysis</h2>
+      <p class="subtitle" style="color: rgba(255,255,255,0.95); text-shadow: 0 2px 4px rgba(0,0,0,0.3); font-weight: 500;">Evidence-based learning design for maximum impact and engagement</p>
      </div>
-     <div class="methodology-section">
-      <h4>🧠 Constructivist Learning Theory</h4>
-      <p><strong>Active Knowledge Building:</strong> Learners click to reveal concepts, make scenario choices, and receive personalized feedback. This hands-on approach helps them construct understanding rather than passively consume content.</p>
-     </div>
-     <div class="methodology-section">
-      <h4>🎮 Gamification &amp; Engagement</h4>
-      <p><strong>Motivation Elements:</strong> Progress tracking, personalized greetings, achievement celebration, and interactive elements maintain engagement. The 5-minute format respects busy schedules while maximizing retention.</p>
-     </div>
-     <div class="methodology-section">
-      <h4>🔄 Experiential Learning (Kolb's Cycle)</h4>
-      <p><strong>Complete Learning Loop:</strong> Concrete Experience (scenario) → Reflective Observation (feedback) → Abstract Conceptualization (theory) → Active Experimentation (next steps). This ensures practical application.</p>
-     </div>
-     <h3 style="color: #667eea; margin: 2rem 0 1rem 0;">Expected Business Impact</h3>
-     <div class="impact-grid">
-      <div class="impact-card">
-       <div class="metric">
-        85%
+     <div class="insights-body">
+      <div class="methodology-section" data-icon="🎯">
+       <h4 data-icon="🎯">Learning Objectives &amp; Bloom's Taxonomy</h4>
+       <p><span class="highlight">Cognitive Levels Applied:</span> Knowledge (Define EI components) → Application (Apply to scenarios) → Evaluation (Assess leadership responses). This progression ensures deep learning and practical skill transfer.</p>
+      </div>
+      <div class="methodology-section" data-icon="🧠">
+       <h4 data-icon="🧠">Constructivist Learning Theory</h4>
+       <p><span class="highlight">Active Knowledge Building:</span> Learners click to reveal concepts, make scenario choices, and receive personalized feedback. This hands-on approach helps them construct understanding rather than passively consume content.</p>
+      </div>
+      <div class="methodology-section" data-icon="🎮">
+       <h4 data-icon="🎮">Gamification &amp; Engagement</h4>
+       <p><span class="highlight">Motivation Elements:</span> Progress tracking, personalized greetings, achievement celebration, and interactive elements maintain engagement. The 5-minute format respects busy schedules while maximizing retention.</p>
+      </div>
+      <div class="methodology-section" data-icon="🔄">
+       <h4 data-icon="🔄">Experiential Learning (Kolb's Cycle)</h4>
+       <p><span class="highlight">Complete Learning Loop:</span> Concrete Experience (scenario) → Reflective Observation (feedback) → Abstract Conceptualization (theory) → Active Experimentation (next steps). This ensures practical application.</p>
+      </div>
+      <div class="section-divider"></div>
+      <div class="section-header">
+       <h3>Expected Business Impact</h3>
+      </div>
+      <div class="impact-grid">
+       <div class="impact-card">
+        <div class="metric">
+         85%
+        </div>
+        <div class="label">
+         Completion Rate
+        </div>
        </div>
-       <div class="label">
-        Completion Rate
+       <div class="impact-card">
+        <div class="metric">
+         40%
+        </div>
+        <div class="label">
+         Engagement Increase
+        </div>
+       </div>
+       <div class="impact-card">
+        <div class="metric">
+         25%
+        </div>
+        <div class="label">
+         Knowledge Retention
+        </div>
+       </div>
+       <div class="impact-card">
+        <div class="metric">
+         60%
+        </div>
+        <div class="label">
+         Skill Application
+        </div>
        </div>
       </div>
-      <div class="impact-card">
-       <div class="metric">
-        40%
-       </div>
-       <div class="label">
-        Engagement Increase
-       </div>
+      <div class="section-divider"></div>
+      <div class="section-header">
+       <h3>Learning Design Principles Applied</h3>
       </div>
-      <div class="impact-card">
-       <div class="metric">
-        25%
-       </div>
-       <div class="label">
-        Knowledge Retention
-       </div>
+      <ul class="theory-list">
+       <li><strong>Microlearning:</strong> 5-minute format increases completion rates and fits busy schedules</li>
+       <li><strong>Personalization:</strong> Name integration creates emotional connection and ownership</li>
+       <li><strong>Immediate Feedback:</strong> Real-time responses reinforce correct behaviors and correct misconceptions</li>
+       <li><strong>Scenario-Based Learning:</strong> Realistic workplace situations ensure practical relevance</li>
+       <li><strong>Progressive Disclosure:</strong> Information revealed step-by-step prevents cognitive overload</li>
+       <li><strong>Social Learning Theory:</strong> Modeling correct EI behaviors through scenario examples</li>
+       <li><strong>Spaced Repetition:</strong> Key concepts reinforced across multiple screens and formats</li>
+      </ul>
+      <div class="implementation-note">
+       <h4>Technical Implementation</h4>
+       <p><span class="tech-stack">Current Stack: HTML5, CSS3, JavaScript</span> with responsive design and accessibility features.</p>
+       <p style="margin-top: 1rem;"><span class="highlight">LMS Compatibility:</span> This design can be implemented in Rise 360, Storyline, Captivate, or any SCORM-compliant LMS. The interactive elements translate well to authoring tools, and the data tracking can integrate with xAPI/Tin Can API for detailed analytics.</p>
       </div>
-      <div class="impact-card">
-       <div class="metric">
-        60%
-       </div>
-       <div class="label">
-        Skill Application
-       </div>
+      <div class="methodology-section" data-icon="📈">
+       <h4 data-icon="📈">ROI Justification for HR/L&amp;D Teams</h4>
+       <p><span class="highlight">Cost-Effective Scaling:</span> One-time development cost serves unlimited learners. Reduced training time (5 min vs 2+ hours traditional) = 95% time savings. Higher engagement = better skill transfer = measurable workplace behavior change. Data tracking enables continuous improvement and demonstrates training effectiveness.</p>
       </div>
-     </div>
-     <h3 style="color: #667eea; margin: 2rem 0 1rem 0;">Learning Design Principles Applied</h3>
-     <ul class="theory-list">
-      <li><strong>Microlearning:</strong> 5-minute format increases completion rates and fits busy schedules</li>
-      <li><strong>Personalization:</strong> Name integration creates emotional connection and ownership</li>
-      <li><strong>Immediate Feedback:</strong> Real-time responses reinforce correct behaviors and correct misconceptions</li>
-      <li><strong>Scenario-Based Learning:</strong> Realistic workplace situations ensure practical relevance</li>
-      <li><strong>Progressive Disclosure:</strong> Information revealed step-by-step prevents cognitive overload</li>
-      <li><strong>Social Learning Theory:</strong> Modeling correct EI behaviors through scenario examples</li>
-      <li><strong>Spaced Repetition:</strong> Key concepts reinforced across multiple screens and formats</li>
-     </ul>
-     <div class="implementation-note">
-      <h4>🛠️ Technical Implementation</h4>
-      <p><strong>Current Stack:</strong> HTML5, CSS3, JavaScript with responsive design and accessibility features. <strong>LMS Compatibility:</strong> This design can be implemented in Rise 360, Storyline, Captivate, or any SCORM-compliant LMS. The interactive elements translate well to authoring tools, and the data tracking can integrate with xAPI/Tin Can API for detailed analytics.</p>
-     </div>
-     <div class="methodology-section">
-      <h4>📈 ROI Justification for HR/L&amp;D Teams</h4>
-      <p><strong>Cost-Effective Scaling:</strong> One-time development cost serves unlimited learners. Reduced training time (5 min vs 2+ hours traditional) = 95% time savings. Higher engagement = better skill transfer = measurable workplace behavior change. Data tracking enables continuous improvement and demonstrates training effectiveness.</p>
-     </div>
-     <div style="text-align: center; margin-top: 2rem;"><button class="btn-primary" onclick="toggleInsights()" style="margin: 0;">Close Insights</button>
+      <div style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0;"><button class="btn-primary" onclick="toggleInsights()" style="margin: 0; padding: 1rem 2rem;">Close Insights</button>
+      </div>
      </div>
     </div>
    </div>
@@ -1583,5 +1870,5 @@
     initializeApp();
     updateProgress();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99720dbc260dd04d',t:'MTc2MTkwMjE4OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9972487cc6232035',t:'MTc2MTkwNDU5My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
