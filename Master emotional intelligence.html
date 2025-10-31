@@ -1,0 +1,1587 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emotional Intelligence for Leaders</title>
+  <script src="/_sdk/data_sdk.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #2d3748;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    html {
+      height: 100%;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .course-container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .insights-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255, 255, 255, 0.95);
+      border: 2px solid #667eea;
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #667eea;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+
+    .insights-toggle:hover {
+      background: #667eea;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .insights-panel {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 2000;
+      display: none;
+      backdrop-filter: blur(5px);
+    }
+
+    .insights-panel.show {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .insights-content {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 2rem;
+      max-width: 900px;
+      max-height: 90%;
+      overflow-y: auto;
+      margin: 1rem;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .insights-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: #f7fafc;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: #4a5568;
+      transition: all 0.3s ease;
+    }
+
+    .insights-close:hover {
+      background: #e2e8f0;
+      transform: rotate(90deg);
+    }
+
+    .methodology-section {
+      background: #f7fafc;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      border-left: 4px solid #667eea;
+    }
+
+    .methodology-section h4 {
+      color: #667eea;
+      margin: 0 0 1rem 0;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .methodology-section p {
+      color: #4a5568;
+      line-height: 1.6;
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .impact-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .impact-card .metric {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .impact-card .label {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .theory-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+
+    .theory-list li {
+      padding: 0.75rem 0;
+      padding-left: 2rem;
+      position: relative;
+      color: #4a5568;
+      line-height: 1.6;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .theory-list li:last-child {
+      border-bottom: none;
+    }
+
+    .theory-list li:before {
+      content: "🎯";
+      position: absolute;
+      left: 0;
+      font-size: 1.2rem;
+    }
+
+    .implementation-note {
+      background: #e6fffa;
+      border: 1px solid #81e6d9;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+    }
+
+    .implementation-note h4 {
+      color: #234e52;
+      margin: 0 0 1rem 0;
+      font-size: 1.1rem;
+    }
+
+    .implementation-note p {
+      color: #285e61;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .progress-bar {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      height: 8px;
+      margin-bottom: 2rem;
+      overflow: hidden;
+      display: none;
+    }
+
+    .progress-bar.show {
+      display: block;
+    }
+
+    .progress-fill {
+      background: #ffffff;
+      height: 100%;
+      width: 0%;
+      transition: width 0.5s ease;
+      border-radius: 10px;
+    }
+
+    .screen {
+      display: none;
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 3rem;
+      flex: 1;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 0.5s ease;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      color: #667eea;
+      font-size: 2.5rem;
+      margin: 0 0 1rem 0;
+      font-weight: 700;
+    }
+
+    h2 {
+      color: #667eea;
+      font-size: 2rem;
+      margin: 0 0 1.5rem 0;
+      font-weight: 600;
+    }
+
+    h3 {
+      color: #4a5568;
+      font-size: 1.5rem;
+      margin: 2rem 0 1rem 0;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      color: #718096;
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .personal-greeting {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .personal-greeting h3 {
+      margin: 0;
+      color: white;
+      font-size: 1.4rem;
+    }
+
+    .personal-greeting p {
+      margin: 0.5rem 0 0 0;
+      opacity: 0.9;
+      font-size: 1.05rem;
+    }
+
+    .objectives-list {
+      background: #f7fafc;
+      border-left: 4px solid #667eea;
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+      border-radius: 8px;
+    }
+
+    .objectives-list h3 {
+      margin-top: 0;
+      color: #667eea;
+    }
+
+    .objectives-list ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .objectives-list li {
+      padding: 0.75rem 0;
+      padding-left: 2rem;
+      position: relative;
+      color: #4a5568;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .objectives-list li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #667eea;
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
+
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .concept-card {
+      background: #f7fafc;
+      padding: 1.5rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .concept-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+      border-color: #667eea;
+    }
+
+    .concept-card.revealed {
+      background: #edf2f7;
+      border-color: #667eea;
+    }
+
+    .concept-card h4 {
+      color: #667eea;
+      margin: 0 0 0.75rem 0;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .concept-card .icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .concept-card .description {
+      display: none;
+      color: #4a5568;
+      line-height: 1.6;
+      margin-top: 1rem;
+      font-size: 1rem;
+    }
+
+    .concept-card.revealed .description {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .scenario-box {
+      background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+      padding: 2rem;
+      border-radius: 12px;
+      margin: 2rem 0;
+      border-left: 4px solid #764ba2;
+    }
+
+    .scenario-box p {
+      color: #4a5568;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin: 0 0 1.5rem 0;
+    }
+
+    .choices {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .choice-btn {
+      background: #ffffff;
+      border: 2px solid #e2e8f0;
+      padding: 1.5rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: left;
+      font-size: 1.05rem;
+      color: #4a5568;
+      font-weight: 500;
+    }
+
+    .choice-btn:hover {
+      border-color: #667eea;
+      background: #f7fafc;
+      transform: translateX(8px);
+    }
+
+    .choice-btn.selected {
+      background: #667eea;
+      color: #ffffff;
+      border-color: #667eea;
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 2rem;
+      padding: 1.5rem;
+      border-radius: 12px;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .feedback.show {
+      display: block;
+    }
+
+    .feedback.positive {
+      background: #c6f6d5;
+      border-left: 4px solid #38a169;
+      color: #22543d;
+    }
+
+    .feedback.constructive {
+      background: #fed7d7;
+      border-left: 4px solid #e53e3e;
+      color: #742a2a;
+    }
+
+    .feedback h4 {
+      margin: 0 0 0.75rem 0;
+      font-size: 1.2rem;
+    }
+
+    .feedback p {
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .quiz-question {
+      background: #f7fafc;
+      padding: 2rem;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+    }
+
+    .quiz-question p {
+      color: #4a5568;
+      font-size: 1.15rem;
+      font-weight: 500;
+      margin: 0 0 1.5rem 0;
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .quiz-option {
+      background: #ffffff;
+      border: 2px solid #e2e8f0;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+      color: #4a5568;
+    }
+
+    .quiz-option:hover {
+      border-color: #667eea;
+      background: #f7fafc;
+    }
+
+    .quiz-option.selected {
+      background: #667eea;
+      color: #ffffff;
+      border-color: #667eea;
+    }
+
+    .quiz-option.correct {
+      background: #38a169;
+      color: #ffffff;
+      border-color: #38a169;
+    }
+
+    .quiz-option.incorrect {
+      background: #e53e3e;
+      color: #ffffff;
+      border-color: #e53e3e;
+    }
+
+    .quiz-feedback {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .quiz-feedback.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .completion-celebration {
+      text-align: center;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 3rem 2rem;
+      border-radius: 16px;
+      margin-bottom: 2rem;
+    }
+
+    .completion-celebration h2 {
+      color: white;
+      font-size: 2.5rem;
+      margin: 0 0 1rem 0;
+    }
+
+    .completion-celebration .learner-name {
+      font-size: 3rem;
+      font-weight: 700;
+      margin: 1rem 0;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .completion-celebration p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin: 0;
+    }
+
+    .summary-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #ffffff;
+      padding: 2rem;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .stat-card .number {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card .label {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    .key-takeaways {
+      background: #f7fafc;
+      padding: 2rem;
+      border-radius: 12px;
+      margin: 2rem 0;
+    }
+
+    .key-takeaways h3 {
+      margin-top: 0;
+      color: #667eea;
+    }
+
+    .key-takeaways ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .key-takeaways li {
+      padding: 1rem 0;
+      padding-left: 2.5rem;
+      position: relative;
+      color: #4a5568;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .key-takeaways li:last-child {
+      border-bottom: none;
+    }
+
+    .key-takeaways li:before {
+      content: "💡";
+      position: absolute;
+      left: 0;
+      font-size: 1.5rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #ffffff;
+      border: none;
+      padding: 1rem 2.5rem;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 2rem;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-secondary {
+      background: #ffffff;
+      color: #667eea;
+      border: 2px solid #667eea;
+      padding: 1rem 2.5rem;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 2rem;
+      margin-left: 1rem;
+    }
+
+    .btn-secondary:hover {
+      background: #f7fafc;
+      transform: translateY(-2px);
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 2px solid #e2e8f0;
+    }
+
+    .loading-indicator {
+      display: none;
+      color: #667eea;
+      font-size: 0.95rem;
+      margin-left: 1rem;
+    }
+
+    .loading-indicator.show {
+      display: inline-block;
+    }
+
+    @media (max-width: 768px) {
+      .course-container {
+        padding: 0.75rem;
+      }
+
+      .insights-toggle {
+        top: 0.5rem;
+        right: 0.5rem;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+      }
+
+      .insights-content {
+        padding: 1.5rem;
+        margin: 0.5rem;
+        max-height: 95%;
+      }
+
+      .impact-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+      }
+
+      .impact-card {
+        padding: 1rem;
+      }
+
+      .impact-card .metric {
+        font-size: 1.5rem;
+      }
+
+      .methodology-section {
+        padding: 1.25rem;
+      }
+
+      .screen {
+        padding: 1.25rem;
+        border-radius: 12px;
+      }
+
+      h1 {
+        font-size: 1.75rem;
+        line-height: 1.2;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+        line-height: 1.3;
+      }
+
+      .subtitle {
+        font-size: 1.1rem;
+      }
+
+      .personal-greeting {
+        padding: 1.25rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .personal-greeting h3 {
+        font-size: 1.2rem;
+      }
+
+      .personal-greeting p {
+        font-size: 1rem;
+      }
+
+      .concept-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .concept-card {
+        padding: 1.25rem;
+      }
+
+      .concept-card .icon {
+        font-size: 2rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .scenario-box {
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+      }
+
+      .scenario-box p {
+        font-size: 1rem;
+      }
+
+      .choice-btn {
+        padding: 1.25rem;
+        font-size: 1rem;
+      }
+
+      .quiz-question {
+        padding: 1.5rem;
+        margin: 1rem 0;
+      }
+
+      .quiz-question p {
+        font-size: 1.05rem;
+      }
+
+      .quiz-option {
+        padding: 0.875rem 1.25rem;
+        font-size: 0.95rem;
+      }
+
+      .summary-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .stat-card {
+        padding: 1.5rem;
+      }
+
+      .stat-card .number {
+        font-size: 2.5rem;
+      }
+
+      .key-takeaways {
+        padding: 1.5rem;
+      }
+
+      .key-takeaways li {
+        padding: 0.75rem 0;
+        padding-left: 2rem;
+        font-size: 1rem;
+      }
+
+      .navigation {
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+      }
+
+      .btn-primary, .btn-secondary {
+        width: 100%;
+        margin: 0;
+        padding: 1rem;
+        font-size: 1rem;
+      }
+
+      .completion-celebration {
+        padding: 2rem 1.5rem;
+      }
+
+      .completion-celebration h2 {
+        font-size: 2rem;
+      }
+
+      .completion-celebration .learner-name {
+        font-size: 2rem;
+      }
+
+      .completion-celebration p {
+        font-size: 1.1rem;
+      }
+
+      .objectives-list {
+        padding: 1.25rem 1.5rem;
+      }
+
+      .objectives-list li {
+        font-size: 1rem;
+        padding: 0.5rem 0;
+      }
+
+      .feedback {
+        padding: 1.25rem;
+      }
+
+      .feedback h4 {
+        font-size: 1.1rem;
+      }
+
+      .feedback p, .feedback li {
+        font-size: 0.95rem;
+      }
+
+      /* Welcome screen mobile optimizations */
+      #screen0 h1 {
+        font-size: 2.25rem;
+      }
+
+      #screen0 .subtitle {
+        font-size: 1.05rem;
+      }
+
+      #screen0 > div {
+        max-width: 100% !important;
+      }
+
+      #screen0 input {
+        font-size: 1rem !important;
+        padding: 0.875rem 1.25rem !important;
+      }
+
+      #screen0 button {
+        font-size: 1.05rem !important;
+        padding: 1rem !important;
+      }
+
+      /* Touch-friendly improvements */
+      .concept-card, .choice-btn, .quiz-option {
+        min-height: 48px;
+      }
+
+      .btn-primary, .btn-secondary {
+        min-height: 48px;
+      }
+
+      /* Improved spacing for mobile */
+      .quiz-feedback {
+        font-size: 0.9rem;
+        padding: 0.875rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .course-container {
+        padding: 0.5rem;
+      }
+
+      .screen {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+      }
+
+      .completion-celebration .learner-name {
+        font-size: 1.75rem;
+      }
+
+      .stat-card .number {
+        font-size: 2rem;
+      }
+
+      .personal-greeting h3 {
+        font-size: 1.1rem;
+      }
+
+      .concept-card .icon {
+        font-size: 1.75rem;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="course-container"><!-- Insights Toggle Button --> <button class="insights-toggle" onclick="toggleInsights()"> 📊 Course Insights </button> <!-- Insights Panel -->
+   <div class="insights-panel" id="insightsPanel">
+    <div class="insights-content"><button class="insights-close" onclick="toggleInsights()">×</button>
+     <h2 style="color: #667eea; margin: 0 0 1.5rem 0;">Course Design &amp; Learning Theory Analysis</h2>
+     <div class="methodology-section">
+      <h4>🎯 Learning Objectives &amp; Bloom's Taxonomy</h4>
+      <p><strong>Cognitive Levels Applied:</strong> Knowledge (Define EI components) → Application (Apply to scenarios) → Evaluation (Assess leadership responses). This progression ensures deep learning and practical skill transfer.</p>
+     </div>
+     <div class="methodology-section">
+      <h4>🧠 Constructivist Learning Theory</h4>
+      <p><strong>Active Knowledge Building:</strong> Learners click to reveal concepts, make scenario choices, and receive personalized feedback. This hands-on approach helps them construct understanding rather than passively consume content.</p>
+     </div>
+     <div class="methodology-section">
+      <h4>🎮 Gamification &amp; Engagement</h4>
+      <p><strong>Motivation Elements:</strong> Progress tracking, personalized greetings, achievement celebration, and interactive elements maintain engagement. The 5-minute format respects busy schedules while maximizing retention.</p>
+     </div>
+     <div class="methodology-section">
+      <h4>🔄 Experiential Learning (Kolb's Cycle)</h4>
+      <p><strong>Complete Learning Loop:</strong> Concrete Experience (scenario) → Reflective Observation (feedback) → Abstract Conceptualization (theory) → Active Experimentation (next steps). This ensures practical application.</p>
+     </div>
+     <h3 style="color: #667eea; margin: 2rem 0 1rem 0;">Expected Business Impact</h3>
+     <div class="impact-grid">
+      <div class="impact-card">
+       <div class="metric">
+        85%
+       </div>
+       <div class="label">
+        Completion Rate
+       </div>
+      </div>
+      <div class="impact-card">
+       <div class="metric">
+        40%
+       </div>
+       <div class="label">
+        Engagement Increase
+       </div>
+      </div>
+      <div class="impact-card">
+       <div class="metric">
+        25%
+       </div>
+       <div class="label">
+        Knowledge Retention
+       </div>
+      </div>
+      <div class="impact-card">
+       <div class="metric">
+        60%
+       </div>
+       <div class="label">
+        Skill Application
+       </div>
+      </div>
+     </div>
+     <h3 style="color: #667eea; margin: 2rem 0 1rem 0;">Learning Design Principles Applied</h3>
+     <ul class="theory-list">
+      <li><strong>Microlearning:</strong> 5-minute format increases completion rates and fits busy schedules</li>
+      <li><strong>Personalization:</strong> Name integration creates emotional connection and ownership</li>
+      <li><strong>Immediate Feedback:</strong> Real-time responses reinforce correct behaviors and correct misconceptions</li>
+      <li><strong>Scenario-Based Learning:</strong> Realistic workplace situations ensure practical relevance</li>
+      <li><strong>Progressive Disclosure:</strong> Information revealed step-by-step prevents cognitive overload</li>
+      <li><strong>Social Learning Theory:</strong> Modeling correct EI behaviors through scenario examples</li>
+      <li><strong>Spaced Repetition:</strong> Key concepts reinforced across multiple screens and formats</li>
+     </ul>
+     <div class="implementation-note">
+      <h4>🛠️ Technical Implementation</h4>
+      <p><strong>Current Stack:</strong> HTML5, CSS3, JavaScript with responsive design and accessibility features. <strong>LMS Compatibility:</strong> This design can be implemented in Rise 360, Storyline, Captivate, or any SCORM-compliant LMS. The interactive elements translate well to authoring tools, and the data tracking can integrate with xAPI/Tin Can API for detailed analytics.</p>
+     </div>
+     <div class="methodology-section">
+      <h4>📈 ROI Justification for HR/L&amp;D Teams</h4>
+      <p><strong>Cost-Effective Scaling:</strong> One-time development cost serves unlimited learners. Reduced training time (5 min vs 2+ hours traditional) = 95% time savings. Higher engagement = better skill transfer = measurable workplace behavior change. Data tracking enables continuous improvement and demonstrates training effectiveness.</p>
+     </div>
+     <div style="text-align: center; margin-top: 2rem;"><button class="btn-primary" onclick="toggleInsights()" style="margin: 0;">Close Insights</button>
+     </div>
+    </div>
+   </div>
+   <div class="progress-bar" id="progressBar">
+    <div class="progress-fill" id="progressFill"></div>
+   </div><!-- Screen 0: Welcome & Name Input -->
+   <div class="screen active" id="screen0">
+    <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+     <h1 style="font-size: 3rem; margin-bottom: 1rem;">👋 Welcome!</h1>
+     <p class="subtitle">Let's personalize your learning experience</p>
+     <div style="background: #f7fafc; padding: 2.5rem; border-radius: 16px; margin: 2rem 0;"><label for="learnerName" style="display: block; font-size: 1.2rem; font-weight: 600; color: #4a5568; margin-bottom: 1rem;">What's your name?</label> <input type="text" id="learnerName" placeholder="Enter your first name" style="width: 100%; padding: 1rem 1.5rem; font-size: 1.1rem; border: 2px solid #e2e8f0; border-radius: 8px; background: #ffffff; color: #2d3748; font-family: inherit; margin-bottom: 1.5rem;" onkeypress="if(event.key==='Enter') startPersonalizedCourse()" oninput="toggleStartButton()"> <button class="btn-primary" onclick="startPersonalizedCourse()" id="startCourseBtn" disabled style="width: 100%; font-size: 1.2rem; padding: 1.25rem;"> Start My Learning Journey </button>
+     </div>
+     <p style="color: #718096; font-size: 1rem; line-height: 1.6;">🎯 <strong>What you'll gain:</strong> Master emotional intelligence skills in just 5 minutes<br>
+       📚 <strong>Format:</strong> Interactive scenarios, knowledge checks, and practical takeaways<br>
+       🏆 <strong>Outcome:</strong> Immediately applicable leadership strategies</p>
+    </div>
+   </div><!-- Screen 1: Introduction -->
+   <div class="screen" id="screen1">
+    <div class="personal-greeting">
+     <h3>Hello, <span id="welcomeName">Learner</span>! 🌟</h3>
+     <p>Ready to enhance your leadership skills?</p>
+    </div>
+    <h1 id="courseTitle">Emotional Intelligence for Leaders</h1>
+    <p class="subtitle" id="introSubtitle">Master the essential skills to lead with empathy, self-awareness, and social intelligence</p>
+    <div class="objectives-list">
+     <h3 id="objectiveLabel">Learning Objectives</h3>
+     <ul>
+      <li><strong>Define</strong> the four core components of emotional intelligence in leadership contexts</li>
+      <li><strong>Apply</strong> emotional intelligence strategies to real workplace scenarios</li>
+      <li><strong>Evaluate</strong> leadership responses using emotional intelligence frameworks</li>
+     </ul>
+    </div>
+    <p style="color: #718096; font-size: 1.05rem; line-height: 1.8; margin-top: 2rem;">In today's complex workplace, technical skills alone aren't enough. Leaders who master emotional intelligence create more engaged teams, navigate conflicts effectively, and drive better business outcomes. This 5-minute course will equip you with practical EI strategies you can apply immediately.</p>
+    <div class="navigation">
+     <div style="color: #718096; font-size: 0.95rem;">
+      ⏱️ Estimated time: 5 minutes
+     </div><button class="btn-primary" id="continueBtn" onclick="nextScreen()">Continue</button>
+    </div>
+   </div><!-- Screen 2: Core Concepts -->
+   <div class="screen" id="screen2">
+    <div class="personal-greeting">
+     <h3>Great progress, <span id="conceptsName">Learner</span>! 📚</h3>
+     <p>Let's explore the core concepts together</p>
+    </div>
+    <h2>The Four Pillars of Emotional Intelligence</h2>
+    <p class="subtitle">Click each pillar to explore its role in effective leadership</p>
+    <div class="concept-grid">
+     <div class="concept-card" onclick="revealConcept(this)"><span class="icon">🧠</span>
+      <h4>Self-Awareness</h4>
+      <p class="description">Understanding your own emotions, strengths, weaknesses, and values. Leaders with high self-awareness recognize how their feelings affect their performance and decisions.</p>
+     </div>
+     <div class="concept-card" onclick="revealConcept(this)"><span class="icon">⚖️</span>
+      <h4>Self-Management</h4>
+      <p class="description">Controlling impulsive feelings and behaviors, managing emotions in healthy ways, and adapting to changing circumstances. This includes stress management and maintaining a positive outlook.</p>
+     </div>
+     <div class="concept-card" onclick="revealConcept(this)"><span class="icon">👥</span>
+      <h4>Social Awareness</h4>
+      <p class="description">Understanding the emotions, needs, and concerns of others. This includes empathy, organizational awareness, and recognizing power dynamics within teams.</p>
+     </div>
+     <div class="concept-card" onclick="revealConcept(this)"><span class="icon">🤝</span>
+      <h4>Relationship Management</h4>
+      <p class="description">Building and maintaining healthy relationships, communicating clearly, inspiring others, working well in teams, and managing conflict effectively.</p>
+     </div>
+    </div>
+    <div class="navigation"><button class="btn-secondary" onclick="previousScreen()">Back</button> <button class="btn-primary" id="conceptContinue" onclick="nextScreen()" disabled>Continue</button>
+    </div>
+   </div><!-- Screen 3: Branching Scenario -->
+   <div class="screen" id="screen3">
+    <div class="personal-greeting">
+     <h3>Time to apply your knowledge, <span id="scenarioName">Learner</span>! 🎯</h3>
+     <p>How would you handle this leadership challenge?</p>
+    </div>
+    <h2>Apply Your Knowledge: A Leadership Challenge</h2>
+    <div class="scenario-box">
+     <p><strong>Scenario:</strong> You're leading a project team that's behind schedule. During a team meeting, one of your top performers, Sarah, becomes visibly frustrated and says, "This project is a disaster. We're never going to make the deadline, and nobody seems to care!"</p>
+     <p>The room goes silent. Other team members look uncomfortable. You notice Sarah's hands are shaking slightly, and she's avoiding eye contact.</p>
+     <p><strong>How do you respond?</strong></p>
+    </div>
+    <div class="choices"><button class="choice-btn" onclick="selectChoice(this, 'A')"> <strong>A.</strong> "Sarah, I understand you're frustrated, but we need to stay professional. Let's take a 10-minute break and reconvene with solutions, not complaints." </button> <button class="choice-btn" onclick="selectChoice(this, 'B')"> <strong>B.</strong> "I can see this is really affecting you, Sarah. Let's pause here. Can you help me understand what's driving your concern? What specific obstacles are you facing?" </button> <button class="choice-btn" onclick="selectChoice(this, 'C')"> <strong>C.</strong> "We're all under pressure, Sarah. Everyone here is working hard. Let's focus on what we can control and move forward with the agenda." </button>
+    </div>
+    <div class="feedback" id="scenarioFeedback"></div>
+    <div class="navigation"><button class="btn-secondary" onclick="previousScreen()">Back</button> <button class="btn-primary" id="scenarioContinue" onclick="nextScreen()" disabled>Continue</button>
+    </div>
+   </div><!-- Screen 4: Knowledge Check Quiz -->
+   <div class="screen" id="screen4">
+    <div class="personal-greeting">
+     <h3>Almost there, <span id="quizName">Learner</span>! 🧠</h3>
+     <p>Let's test your understanding</p>
+    </div>
+    <h2>Knowledge Check</h2>
+    <p class="subtitle">Test your understanding of emotional intelligence principles</p>
+    <div class="quiz-question">
+     <p><strong>Question 1:</strong> Which EI component involves recognizing and understanding the emotions of your team members?</p>
+     <div class="quiz-options"><button class="quiz-option" onclick="selectQuizAnswer(1, this, false)">Self-Awareness</button> <button class="quiz-option" onclick="selectQuizAnswer(1, this, false)">Self-Management</button> <button class="quiz-option" onclick="selectQuizAnswer(1, this, true)">Social Awareness</button> <button class="quiz-option" onclick="selectQuizAnswer(1, this, false)">Relationship Management</button>
+     </div>
+     <div class="quiz-feedback" id="feedback1"></div>
+    </div>
+    <div class="quiz-question">
+     <p><strong>Question 2:</strong> A leader who can control their impulses and adapt their behavior to changing situations demonstrates strong:</p>
+     <div class="quiz-options"><button class="quiz-option" onclick="selectQuizAnswer(2, this, false)">Social Awareness</button> <button class="quiz-option" onclick="selectQuizAnswer(2, this, true)">Self-Management</button> <button class="quiz-option" onclick="selectQuizAnswer(2, this, false)">Empathy</button> <button class="quiz-option" onclick="selectQuizAnswer(2, this, false)">Communication Skills</button>
+     </div>
+     <div class="quiz-feedback" id="feedback2"></div>
+    </div>
+    <div class="quiz-question">
+     <p><strong>Question 3:</strong> When a leader acknowledges their own emotional triggers and biases before making decisions, they are practicing:</p>
+     <div class="quiz-options"><button class="quiz-option" onclick="selectQuizAnswer(3, this, true)">Self-Awareness</button> <button class="quiz-option" onclick="selectQuizAnswer(3, this, false)">Conflict Resolution</button> <button class="quiz-option" onclick="selectQuizAnswer(3, this, false)">Team Building</button> <button class="quiz-option" onclick="selectQuizAnswer(3, this, false)">Strategic Thinking</button>
+     </div>
+     <div class="quiz-feedback" id="feedback3"></div>
+    </div>
+    <div class="navigation"><button class="btn-secondary" onclick="previousScreen()">Back</button> <button class="btn-primary" id="quizContinue" onclick="nextScreen()" disabled>Continue</button>
+    </div>
+   </div><!-- Screen 5: Summary & Completion -->
+   <div class="screen" id="screen5">
+    <div class="completion-celebration">
+     <h2>🎉 Congratulations!</h2>
+     <div class="learner-name" id="completionName">
+      Learner
+     </div>
+     <p>You've successfully completed the Emotional Intelligence for Leaders course!</p>
+    </div>
+    <div class="summary-stats">
+     <div class="stat-card">
+      <div class="number" id="quizScore">
+       0
+      </div>
+      <div class="label">
+       Quiz Score
+      </div>
+     </div>
+     <div class="stat-card">
+      <div class="number">
+       4
+      </div>
+      <div class="label">
+       Pillars Explored
+      </div>
+     </div>
+     <div class="stat-card">
+      <div class="number">
+       1
+      </div>
+      <div class="label">
+       Scenario Completed
+      </div>
+     </div>
+    </div>
+    <div class="key-takeaways">
+     <h3>Key Takeaways for <span id="takeawaysName">You</span></h3>
+     <ul>
+      <li><strong>Self-Awareness</strong> is the foundation of emotional intelligence. Regular reflection on your emotions and triggers improves decision-making.</li>
+      <li><strong>Self-Management</strong> helps you stay composed under pressure and adapt to change, modeling resilience for your team.</li>
+      <li><strong>Social Awareness</strong> enables you to read the room, understand team dynamics, and respond with empathy.</li>
+      <li><strong>Relationship Management</strong> transforms awareness into action through effective communication, conflict resolution, and team building.</li>
+      <li>In challenging situations, pause to acknowledge emotions before problem-solving. This validates concerns and builds trust.</li>
+     </ul>
+    </div>
+    <p style="color: #4a5568; font-size: 1.05rem; line-height: 1.8; margin-top: 2rem;"><strong>Next Steps for <span id="nextStepsName">You</span>:</strong> Practice one EI skill this week. Start with self-awareness by journaling about your emotional responses to workplace situations. Notice patterns and consider how they impact your leadership effectiveness.</p>
+    <div class="navigation"><button class="btn-secondary" onclick="previousScreen()">Back</button> <button class="btn-primary" onclick="completeCourse()"> Finish Course <span class="loading-indicator" id="loadingIndicator">Saving...</span> </button>
+    </div>
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      course_title: "Emotional Intelligence for Leaders",
+      intro_subtitle: "Master the essential skills to lead with empathy, self-awareness, and social intelligence",
+      objective_label: "Learning Objectives",
+      continue_button: "Continue",
+      background_color: "#667eea",
+      surface_color: "#ffffff",
+      text_color: "#2d3748",
+      primary_action_color: "#667eea",
+      secondary_action_color: "#764ba2",
+      font_family: "Inter",
+      font_size: 16
+    };
+
+    let currentScreen = 0;
+    let revealedConcepts = 0;
+    let scenarioChoice = null;
+    let quizAnswers = { q1: null, q2: null, q3: null };
+    let quizScore = 0;
+    let learnerName = "";
+
+    const dataHandler = {
+      onDataChanged(data) {
+        // Write-only application - no need to display data
+      }
+    };
+
+    async function initializeApp() {
+      if (window.dataSdk) {
+        const initResult = await window.dataSdk.init(dataHandler);
+        if (!initResult.isOk) {
+          console.error("Failed to initialize data SDK");
+        }
+      }
+
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange: async (config) => {
+            const customFont = config.font_family || defaultConfig.font_family;
+            const baseSize = config.font_size || defaultConfig.font_size;
+            const baseFontStack = '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+
+            document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+            document.body.style.background = `linear-gradient(135deg, ${config.background_color || defaultConfig.background_color} 0%, ${config.secondary_action_color || defaultConfig.secondary_action_color} 100%)`;
+            document.body.style.color = config.text_color || defaultConfig.text_color;
+
+            const screens = document.querySelectorAll('.screen');
+            screens.forEach(screen => {
+              screen.style.background = config.surface_color || defaultConfig.surface_color;
+            });
+
+            const h1Elements = document.querySelectorAll('h1, h2, .objectives-list h3, .concept-card h4, .key-takeaways h3');
+            h1Elements.forEach(el => {
+              el.style.color = config.primary_action_color || defaultConfig.primary_action_color;
+            });
+
+            document.querySelectorAll('h1').forEach(el => {
+              el.style.fontSize = `${baseSize * 2.5}px`;
+            });
+
+            document.querySelectorAll('h2').forEach(el => {
+              el.style.fontSize = `${baseSize * 2}px`;
+            });
+
+            document.querySelectorAll('h3').forEach(el => {
+              el.style.fontSize = `${baseSize * 1.5}px`;
+            });
+
+            document.querySelectorAll('p, li, button').forEach(el => {
+              el.style.fontSize = `${baseSize}px`;
+            });
+
+            const primaryButtons = document.querySelectorAll('.btn-primary');
+            primaryButtons.forEach(btn => {
+              btn.style.background = `linear-gradient(135deg, ${config.primary_action_color || defaultConfig.primary_action_color} 0%, ${config.secondary_action_color || defaultConfig.secondary_action_color} 100%)`;
+            });
+
+            const secondaryButtons = document.querySelectorAll('.btn-secondary');
+            secondaryButtons.forEach(btn => {
+              btn.style.color = config.primary_action_color || defaultConfig.primary_action_color;
+              btn.style.borderColor = config.primary_action_color || defaultConfig.primary_action_color;
+            });
+
+            const statCards = document.querySelectorAll('.stat-card');
+            statCards.forEach(card => {
+              card.style.background = `linear-gradient(135deg, ${config.primary_action_color || defaultConfig.primary_action_color} 0%, ${config.secondary_action_color || defaultConfig.secondary_action_color} 100%)`;
+            });
+
+            const personalGreetings = document.querySelectorAll('.personal-greeting, .completion-celebration');
+            personalGreetings.forEach(greeting => {
+              greeting.style.background = `linear-gradient(135deg, ${config.primary_action_color || defaultConfig.primary_action_color} 0%, ${config.secondary_action_color || defaultConfig.secondary_action_color} 100%)`;
+            });
+
+            document.getElementById('courseTitle').textContent = config.course_title || defaultConfig.course_title;
+            document.getElementById('introSubtitle').textContent = config.intro_subtitle || defaultConfig.intro_subtitle;
+            document.getElementById('objectiveLabel').textContent = config.objective_label || defaultConfig.objective_label;
+            document.getElementById('continueBtn').textContent = config.continue_button || defaultConfig.continue_button;
+          },
+          mapToCapabilities: (config) => ({
+            recolorables: [
+              {
+                get: () => config.background_color || defaultConfig.background_color,
+                set: (value) => {
+                  if (window.elementSdk) {
+                    window.elementSdk.setConfig({ background_color: value });
+                  }
+                }
+              },
+              {
+                get: () => config.surface_color || defaultConfig.surface_color,
+                set: (value) => {
+                  if (window.elementSdk) {
+                    window.elementSdk.setConfig({ surface_color: value });
+                  }
+                }
+              },
+              {
+                get: () => config.text_color || defaultConfig.text_color,
+                set: (value) => {
+                  if (window.elementSdk) {
+                    window.elementSdk.setConfig({ text_color: value });
+                  }
+                }
+              },
+              {
+                get: () => config.primary_action_color || defaultConfig.primary_action_color,
+                set: (value) => {
+                  if (window.elementSdk) {
+                    window.elementSdk.setConfig({ primary_action_color: value });
+                  }
+                }
+              },
+              {
+                get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+                set: (value) => {
+                  if (window.elementSdk) {
+                    window.elementSdk.setConfig({ secondary_action_color: value });
+                  }
+                }
+              }
+            ],
+            borderables: [],
+            fontEditable: {
+              get: () => config.font_family || defaultConfig.font_family,
+              set: (value) => {
+                if (window.elementSdk) {
+                  window.elementSdk.setConfig({ font_family: value });
+                }
+              }
+            },
+            fontSizeable: {
+              get: () => config.font_size || defaultConfig.font_size,
+              set: (value) => {
+                if (window.elementSdk) {
+                  window.elementSdk.setConfig({ font_size: value });
+                }
+              }
+            }
+          }),
+          mapToEditPanelValues: (config) => new Map([
+            ["course_title", config.course_title || defaultConfig.course_title],
+            ["intro_subtitle", config.intro_subtitle || defaultConfig.intro_subtitle],
+            ["objective_label", config.objective_label || defaultConfig.objective_label],
+            ["continue_button", config.continue_button || defaultConfig.continue_button]
+          ])
+        });
+      }
+    }
+
+    function toggleStartButton() {
+      const nameInput = document.getElementById('learnerName');
+      const startBtn = document.getElementById('startCourseBtn');
+      startBtn.disabled = nameInput.value.trim().length === 0;
+    }
+
+    function startPersonalizedCourse() {
+      const nameInput = document.getElementById('learnerName');
+      learnerName = nameInput.value.trim();
+      
+      if (learnerName) {
+        // Update all name placeholders
+        document.getElementById('welcomeName').textContent = learnerName;
+        document.getElementById('conceptsName').textContent = learnerName;
+        document.getElementById('scenarioName').textContent = learnerName;
+        document.getElementById('quizName').textContent = learnerName;
+        document.getElementById('completionName').textContent = learnerName;
+        document.getElementById('takeawaysName').textContent = learnerName;
+        document.getElementById('nextStepsName').textContent = learnerName;
+        
+        // Show progress bar and move to first screen
+        document.getElementById('progressBar').classList.add('show');
+        nextScreen();
+      }
+    }
+
+    function updateProgress() {
+      if (currentScreen === 0) return; // Don't show progress on welcome screen
+      const progress = ((currentScreen) / 5) * 100;
+      document.getElementById('progressFill').style.width = progress + '%';
+    }
+
+    function nextScreen() {
+      document.getElementById(`screen${currentScreen}`).classList.remove('active');
+      currentScreen++;
+      document.getElementById(`screen${currentScreen}`).classList.add('active');
+      updateProgress();
+      window.scrollTo(0, 0);
+    }
+
+    function previousScreen() {
+      document.getElementById(`screen${currentScreen}`).classList.remove('active');
+      currentScreen--;
+      document.getElementById(`screen${currentScreen}`).classList.add('active');
+      updateProgress();
+      window.scrollTo(0, 0);
+    }
+
+    function revealConcept(card) {
+      if (!card.classList.contains('revealed')) {
+        card.classList.add('revealed');
+        revealedConcepts++;
+        
+        if (revealedConcepts === 4) {
+          document.getElementById('conceptContinue').disabled = false;
+        }
+      }
+    }
+
+    function selectChoice(button, choice) {
+      document.querySelectorAll('.choice-btn').forEach(btn => {
+        btn.classList.remove('selected');
+      });
+      
+      button.classList.add('selected');
+      scenarioChoice = choice;
+      
+      const feedbackDiv = document.getElementById('scenarioFeedback');
+      feedbackDiv.classList.remove('positive', 'constructive');
+      
+      if (choice === 'B') {
+        feedbackDiv.classList.add('positive');
+        feedbackDiv.innerHTML = `
+          <h4>✓ Excellent Choice, ${learnerName}!</h4>
+          <p><strong>EI Skills Applied:</strong> Social Awareness (empathy) and Relationship Management (active listening)</p>
+          <p>By acknowledging Sarah's emotions and inviting her to share specific concerns, you've demonstrated emotional intelligence. This approach:</p>
+          <ul style="margin: 0.5rem 0 0 1.5rem; line-height: 1.8;">
+            <li>Validates her feelings without judgment</li>
+            <li>Creates psychological safety for the team</li>
+            <li>Shifts from emotional reaction to problem-solving</li>
+            <li>Models vulnerability and openness as a leader</li>
+          </ul>
+        `;
+      } else if (choice === 'A') {
+        feedbackDiv.classList.add('constructive');
+        feedbackDiv.innerHTML = `
+          <h4>Consider This Alternative, ${learnerName}</h4>
+          <p><strong>What's Missing:</strong> While setting boundaries is important, this response may dismiss Sarah's emotions.</p>
+          <p>A more emotionally intelligent approach would first acknowledge her feelings before redirecting. Try: "I can see you're really frustrated, Sarah. Let's take a break, and then I'd like to understand what's driving this concern."</p>
+          <p><strong>Key Learning:</strong> Emotional validation before problem-solving builds trust and psychological safety.</p>
+        `;
+      } else {
+        feedbackDiv.classList.add('constructive');
+        feedbackDiv.innerHTML = `
+          <h4>Room for Improvement, ${learnerName}</h4>
+          <p><strong>What's Missing:</strong> This response minimizes Sarah's concerns and may shut down communication.</p>
+          <p>While acknowledging team effort is valuable, dismissing individual emotions can damage trust. A better approach: "I hear your frustration, Sarah. Everyone is working hard, and I want to make sure we're addressing the real obstacles. Can we talk about what's not working?"</p>
+          <p><strong>Key Learning:</strong> Social awareness means recognizing when someone needs to be heard, not just redirected.</p>
+        `;
+      }
+      
+      feedbackDiv.classList.add('show');
+      document.getElementById('scenarioContinue').disabled = false;
+    }
+
+    function selectQuizAnswer(questionNum, button, isCorrect) {
+      const questionDiv = button.closest('.quiz-question');
+      const options = questionDiv.querySelectorAll('.quiz-option');
+      const feedbackDiv = document.getElementById(`feedback${questionNum}`);
+      
+      if (quizAnswers[`q${questionNum}`] !== null) {
+        return;
+      }
+      
+      options.forEach(opt => opt.style.pointerEvents = 'none');
+      
+      if (isCorrect) {
+        button.classList.add('correct');
+        quizScore++;
+        
+        const feedbacks = {
+          1: "Correct! Social Awareness is the ability to understand and recognize the emotions of others, including empathy and organizational awareness.",
+          2: "Correct! Self-Management involves controlling impulses, managing emotions, and adapting behavior to changing circumstances.",
+          3: "Correct! Self-Awareness is recognizing your own emotions, triggers, and biases, which is essential for effective decision-making."
+        };
+        
+        feedbackDiv.textContent = feedbacks[questionNum];
+        feedbackDiv.style.background = '#c6f6d5';
+        feedbackDiv.style.color = '#22543d';
+      } else {
+        button.classList.add('incorrect');
+        
+        options.forEach(opt => {
+          if (opt.textContent.includes('Social Awareness') && questionNum === 1) opt.classList.add('correct');
+          if (opt.textContent.includes('Self-Management') && questionNum === 2) opt.classList.add('correct');
+          if (opt.textContent.includes('Self-Awareness') && questionNum === 3) opt.classList.add('correct');
+        });
+        
+        const feedbacks = {
+          1: "Not quite. The correct answer is Social Awareness, which involves understanding and recognizing the emotions of others.",
+          2: "Not quite. The correct answer is Self-Management, which includes controlling impulses and adapting to change.",
+          3: "Not quite. The correct answer is Self-Awareness, which is recognizing your own emotional triggers and biases."
+        };
+        
+        feedbackDiv.textContent = feedbacks[questionNum];
+        feedbackDiv.style.background = '#fed7d7';
+        feedbackDiv.style.color = '#742a2a';
+      }
+      
+      feedbackDiv.classList.add('show');
+      quizAnswers[`q${questionNum}`] = isCorrect;
+      
+      if (quizAnswers.q1 !== null && quizAnswers.q2 !== null && quizAnswers.q3 !== null) {
+        document.getElementById('quizContinue').disabled = false;
+        document.getElementById('quizScore').textContent = `${quizScore}/3`;
+      }
+    }
+
+    async function completeCourse() {
+      if (!window.dataSdk) {
+        window.location.reload();
+        return;
+      }
+
+      const loadingIndicator = document.getElementById('loadingIndicator');
+      const completeButton = document.querySelector('#screen5 .btn-primary');
+      
+      loadingIndicator.classList.add('show');
+      completeButton.disabled = true;
+
+      const completionData = {
+        learner_id: `learner_${Date.now()}`,
+        learner_name: learnerName,
+        completion_status: "completed",
+        quiz_score: quizScore,
+        scenario_choice: scenarioChoice || "not_selected",
+        completed_at: new Date().toISOString()
+      };
+
+      const result = await window.dataSdk.create(completionData);
+
+      loadingIndicator.classList.remove('show');
+
+      if (result.isOk) {
+        completeButton.textContent = `✓ Well done, ${learnerName}!`;
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      } else {
+        completeButton.disabled = false;
+        completeButton.textContent = "Finish Course";
+        
+        const errorMessage = document.createElement('div');
+        errorMessage.style.cssText = 'margin-top: 1rem; padding: 1rem; background: #fed7d7; color: #742a2a; border-radius: 8px; font-size: 0.95rem;';
+        errorMessage.textContent = 'Unable to save completion data. Please try again.';
+        completeButton.parentElement.appendChild(errorMessage);
+        
+        setTimeout(() => errorMessage.remove(), 5000);
+      }
+    }
+
+    function toggleInsights() {
+      const panel = document.getElementById('insightsPanel');
+      panel.classList.toggle('show');
+    }
+
+    // Close insights panel when clicking outside
+    document.addEventListener('click', function(event) {
+      const panel = document.getElementById('insightsPanel');
+      const toggle = document.querySelector('.insights-toggle');
+      const content = document.querySelector('.insights-content');
+      
+      if (panel.classList.contains('show') && 
+          !content.contains(event.target) && 
+          !toggle.contains(event.target)) {
+        panel.classList.remove('show');
+      }
+    });
+
+    initializeApp();
+    updateProgress();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99720dbc260dd04d',t:'MTc2MTkwMjE4OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
